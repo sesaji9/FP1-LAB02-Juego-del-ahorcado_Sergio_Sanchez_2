@@ -30,8 +30,16 @@ def normalizar(cadena):
     Devuelve:
       Cadena de texto con la palabra normalizada
     """
+    cadena = cadena.lower()
+    cadena = cadena.strip()
+    cadena = cadena.replace("á","a")
+    cadena = cadena.replace("é","e")
+    cadena = cadena.replace("í","i")
+    cadena = cadena.replace("ó","o")
+    cadena = cadena.replace("ú","u")
+    cadena = cadena.replace("ü","u")
+    return cadena
     # TODO: Implementa esta función (y elimina la instrucción pass)
-    pass
 
 def enmascarar(palabra_secreta, letras_usadas=""):
     '''Devuelve una cadena de texto con la palabra enmascarada. 
@@ -44,8 +52,14 @@ def enmascarar(palabra_secreta, letras_usadas=""):
     Devuelve:
       Cadena de texto con la palabra enmascarada
     '''
+    resultado = ""
+    for letra in palabra_secreta:
+        if letra in letras_usadas:
+            resultado += letra
+        else:
+            resultado += "_"
+    return resultado
     # TODO: Implementa esta función (y elimina la instrucción pass)
-    pass
 
 
 def ha_ganado(palabra_enmascarada):
@@ -57,13 +71,38 @@ def ha_ganado(palabra_enmascarada):
     Devuelve:
     - True si el jugador ha ganado, False en caso contrario
     '''
+    if "_" not in palabra_enmascarada:
+        return True
+    else:
+        return False
     # TODO: Implementa esta función (y elimina la instrucción pass)
-    pass
+    
 
 
 # TODO: Implementa la función mostrar_estado
+def mostrar_estado(palabra_enmascarada,letras_usadas, intentos_res):
+    print(f"Estado: {palabra_enmascarada}")
+    " ".join(palabra_enmascarada)
+    if letras_usadas == "":
+        print("Letras usadas: ninguna")
+    else:
+        print(f"Letras usadas: {letras_usadas}")
+    print(f"Intentos restantes: {intentos_res}")
 
 # TODO: Implementa la función pedir_letra
+def pedir_letra(letras_usadas):
+    letra = input("Introduce una letra: ").lower()
+    while True:
+        if letra.isdigit():
+            letra = str(input("Debes introducir una letra: "))
+        elif len(letra) > 1:
+            letra = str(input("Debes introducir una letra: "))
+        elif letra in letras_usadas:
+            letra = str(input("Esa letra ya la has usado anteriormente, introduce otra: "))
+        else:
+            return letra
+
+        #REVISAR POR QUE AL PONER "A" SÍ FUNCIONA
 
 # TODO: Implementa la función jugar
 
